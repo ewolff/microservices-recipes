@@ -34,7 +34,7 @@ even if another microservice displays that information in its UI.
 
 ## Recipe: ESI (Edge Side Includes)
 
-[ESI] (https://www.w3.org/TR/esi-lang) (Edge Side Includes) integrates
+[ESI](https://www.w3.org/TR/esi-lang) (Edge Side Includes) integrates
 HTML fragments of a microservice with fragments of other
 microservices.  For this, the microservice generates HTML, which
 contains ESI tags. The ESI implementation evaluates the ESI tags and
@@ -85,8 +85,8 @@ frontend.
 ~~~~~~~~
 
 The Order Microservice returns an HTML page as shown in
-[listing 1](#listing-01). Such a page is available at <http://
-localhost: 8090/> when the Docker container runs on the local
+[listing 1](#listing-01). Such a page is available at
+<http://localhost: 8090/> when the Docker container runs on the local 
 computer. If you look at this page in the browser, the browser does
 not interpret the ESI tags, so the browser displays a garbled web
 page.

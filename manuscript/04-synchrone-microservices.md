@@ -66,7 +66,7 @@ microservices.
 
 #### Docker
 
-Kubernetes is based on [Docker] (https://www.docker.com/). Docker
+Kubernetes is based on [Docker](https://www.docker.com/). Docker
 makes it possible to decouple processes from each other in a Linux
 system: *Docker containers* provide an operating system process with
 its own file system and its own network interface with its own IP

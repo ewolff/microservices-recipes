@@ -6,7 +6,7 @@ behind microservices.
 
 ## Independent Systems Architecture Principles (ISA)
 
-[ISA] (http://isa-principles.org) (Independent Systems Architecture)
+[ISA](http://isa-principles.org) (Independent Systems Architecture)
 is a collection of basic principles for microservices. It is based on
 experience with microservices in many different projects.
 
@@ -73,10 +73,11 @@ networks, configuration, etc.)  without losing data or other state.
 ## Reason
 
 ISA shows that microservices are a way of modularization (principle
-1). So ideas like [Information Hiding]
-(https://en.wikipedia.org/wiki/Information_hiding) or high [Cohesion]
-(https://en.wikipedia.org/wiki/Cohesion_%28computer_science%29) / low
-Coupling are also applicable to microservices. The difference to
+1). So ideas like
+[Information Hiding](https://en.wikipedia.org/wiki/Information_hiding)
+or high
+[Cohesion](https://en.wikipedia.org/wiki/Cohesion_%28computer_science%29)
+/ low Coupling are also applicable to microservices. The difference to
 traditional modules is the implementation as a separate container
 (principle 2). This allows more freedom in the technical
 implementation of the modules.  However, the modules are still part of
@@ -117,7 +118,7 @@ contain a UI or not.
 Self-contained systems (SCS) are an approach to microservices that
 has already proven itself in many projects. All essential
 information on SCSs can be found on the website
-http://scs-architecture.org/. Here is an overview of the
+<http://scs-architecture.org/>. Here is an overview of the
 Characteristics:
 
 - Each SCS is an *autonomous web application*. The code for 
@@ -159,7 +160,7 @@ cost reasons, compromises can be made.
     these goals.
 
 The SCS idea has already proven itself in many projects. The
-[links on the website] (http://scs-architecture.org/links.html) give
+[links on the website](http://scs-architecture.org/links.html) give
 an impression of some of those project. It is only usable for web
 applications, since every SCS has a web interface. But the separation
 into systems that implement some business logic and are developed by a

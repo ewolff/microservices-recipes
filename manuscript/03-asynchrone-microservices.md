@@ -154,8 +154,9 @@ An alternative data format is [Avro](http://avro.apache.org/). It
 ## Alternative Recipe: REST with Atom
 
 Asynchronous microservices can also be implemented with REST. For
-example, it is possible to provide orders as an [Atom Feed]
-https://validator.w3.org/feed/docs/atom.html). Atom is a data format
+example, it is possible to provide orders as an
+[Atom Feed](https://validator.w3.org/feed/docs/atom.html). Atom is a
+data format 
 originally developed to make blogs available to readers. Just as a new
 entry in an Atom document is created for each new blog post, the same
 is possible for every new order. A client must then periodically poll
@@ -185,8 +186,8 @@ database is created for each order.
 It is not mandatory to use the Atom format. You can also
 use your own format to make the changes available as a list and then
 provide details with links. Likewise, a different feed format such as
-[RSS] (http://web.resource.org/rss/1.0/spec) or [JSON Feed]
-(http://jsonfeed.org/) can be used.
+[RSS](http://web.resource.org/rss/1.0/spec) or
+[JSON Feed](http://jsonfeed.org/) can be used.
 
 #### Other MOMs
 

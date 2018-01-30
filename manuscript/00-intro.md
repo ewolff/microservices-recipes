@@ -27,5 +27,5 @@ to name them all. The discussions help a lot and are good fun!
 Many of the ideas and also the implementations are unthinkable without
 my colleagues at INNOQ .
 
-Thanks to JÃ¶rn Hameister for the extensive feedback about the German
+Thanks to Jörn Hameister for the extensive feedback about the German
 edition of this brochure!
