@@ -1,18 +1,17 @@
 # Concept: Synchronous Microservices
 
-
 Many microservice systems use synchronous communication. This chapter
 shows how synchronous microservices can be implemented with different
 technologies.
 
 ## Definition
 
-The last chapter has already defined synchronous microservices:
+The last chapter already defined synchronous microservices:
 
 > A microservice is syncronous if it makes a request to other
 > microservices and waits for the result while itself processing requests.
 
-So, a synchronous order microservice can request customer data from
+Thus, a synchronous order microservice can request customer data from
 another microservice while processing a request for an order.
 
 Many microservice systems use synchronous communication. This chapter
@@ -23,7 +22,7 @@ technologies.
 
 The reasons for using synchronous microservices are:
 
-* Synchronous Microservices are *easy to understand*.
+* Synchronous microservices are *easy to understand*.
 Instead of a local method call, functionality is called in another
 microservice. This is quite close to what programmers are used to.
 
@@ -31,9 +30,9 @@ microservice. This is quite close to what programmers are used to.
   information is retrieved from all other services. So the data is
   up-to-date unless a last-minute change has occurred.
 
-But *resilience * is more complex: If the called microservice is
-currently not available, the caller must deal with the failure 9in a
-way that it does not fail as well. For this, the caller can use data
+But *resilience* is more complex: If the called microservice is
+currently not available, the caller must deal with the failure in a
+way that ensures that it does not fail as well. For this, the caller can use data
 from a cache or resort to a simplified algorithm that does not need
 the information from the other microservice.
 
@@ -69,9 +68,9 @@ microservices.
 Kubernetes is based on [Docker](https://www.docker.com/). Docker
 makes it possible to decouple processes from each other in a Linux
 system: *Docker containers* provide an operating system process with
-its own file system and its own network interface with its own IP
+its own file system, its own network interface, and its own IP
 address. Unlike a virtual machine, however, all Docker containers use
-the same Linux kernel. So a Docker container is consumes hardly more
+the same Linux kernel. Therefore, a Docker container consumes hardly more
 ressources than a Linux process. It is easily possible to run hundreds
 of Docker containers on a laptop.
 
@@ -86,17 +85,17 @@ space occupied by Docker images.
 
 #### Kubernetes is a Docker Scheduler.
 
-Running Docker containers on a single Docker host is not enough. If
+Running Docker containers on a single Docker host is not sufficient. If
 the Docker host fails, all Docker containers will fail. In addition,
 the scalability is limited by the performance of the Docker host.
 
-To run Docker containers in a cluster of machines, there are
+To run Docker containers on a cluster of machines, there are
 schedulers like *Kubernetes*. Kubernetes introduces some new concepts:
 
 * *Nodes* are the servers Kubernetes is running on. They are organized
   in a cluster.
 
-* *Pods* are multiple Docker containers that provide a servive
+* *Pods* are multiple Docker containers that provide a service
   together. This could be, for example, a container with a
   microservice together with a container for log processing.
 
@@ -109,15 +108,14 @@ schedulers like *Kubernetes*. Kubernetes introduces some new concepts:
 * *Services* make pods accessible. The services are registered under a
 name in the DNS and have a fixed IP address under which they can be
 contacted throughout the cluster. In addition, the service enables the
-routing of request from the outside to a service instance.
-
+routing of requests from the outside to a service instance.
 
 ![Kubernetes Concepts](images/kubernetes-beispiel-microservice.png)
 
-The figures shows all the Kubernetes concept: A deployment
-creates a replica set. The replica Set does not just create the
-Kubernetes pods, but also launches new, in case some of the pods
-fail. The pods include one or more docker containers.
+The figure illustrates all the Kubernetes concepts: A deployment
+creates a replica set. The replica set does not just create the
+Kubernetes pods, but also launches new ones, in case some of the pods
+fail. The pods include one or more Docker containers.
 
 The Kubernetes service creates the DNS record and makes the
 microservice available at an IP address that is unique throughout the
@@ -126,7 +124,7 @@ the service can be reached on all Kubernetes nodes. Instead of a node
 port, a service can also create a *load balancer*. This is a load
 balancer offered by the infrastructure. For example, if Kubernetes is
 running in the Amazon Cloud, Kubernetes would create an Amazon Elastic
-Load Balancer.
+Load Balancer (ELB).
 
 #### Synchronous Microservices with Kubernetes
 
@@ -143,16 +141,16 @@ Kubernetes solves the challenges of synchronous microservices as follows:
 * Concerning *routing* the Kubernetes service can be implemented
   either via the node port or via a load balancer. It depends on how
   the service is configured and if the infrastructure offers a load
-  balancer. An external request is either be sent to the load
-  balancer or the node port to reach the microservice.
+  balancer. An external request is either sent to the load
+  balancer or to the node port to reach the microservice.
 
 * For *resilience* Kubernetes has no solution. Of course, Kubernetes
   can start additional pods in case of a failure, but further
   resilience patterns like timeout or circuit breaker are not
   implemented by Kubernetes.
 
-The solution that Kubernetes offers for the challenges of synchronous
-microservices does not lead to any code dependencies on Kubernetes. If
+The solutions that Kubernetes offers for the challenges of synchronous
+microservices do not lead to any code dependencies on Kubernetes. If
 a microservice invokes another, it must resolve the name using DNS and
 communicate with the returned IP address. This is no different from
 communicating with any other server. For routing, an external
@@ -173,32 +171,32 @@ catalog. Order uses catalog and customer via the REST interface. In
 addition, every microservice provides some HTML pages.
 
 In the example also an Apache web server is installed, which provides
-the users with a website to make entry into the system easy.
+the users with a website to facilitate using the system.
 
-Finally a Hystrix dashboard is available as a separate Kubernetes
-pod. The Example uses the Java library
+Finally, a Hystrix dashboard is available as a separate Kubernetes
+pod. The example uses the Java library
 [Hystrix](https://github.com/Netflix/Hystrix/) for resilience.  Among
-other things, this library runs calls in a separate thread pool and it
+other things, this library runs calls in a separate thread pool, and it
 implements a timeout for the calls.
 
 On a laptop, you can use
 [Minikube](https://github.com/kubernetes/minikube) to run the
 example. This Kubernetes distribution is very easy to
-install. However, it provides no load balancer, so the services just
-over a node port.
+install. However, it provides no load balancer, so the services are
+only accessible over a node port.
 
 The script `docker-build.sh` creates the Docker images for the
-microservices and uploads them to the public Docker Hub.  This step is
+microservices and uploads them to the public Docker hub. This step is
 optional because the images are already stored on the Docker hub.
 
 The script `kubernets-deploy.sh` deploys the images from the public
 Docker hub. To do this, the script uses the tool `kubectl`. `kubectl
 run` starts the image. The image is downloaded from the specified URL
-at the Docker hub. Also this command defines which ports the Docker
+at the Docker hub. In addition, this command defines which ports the Docker
 containers will provide.  `kubectl run` creates the deployment which
 constructs the replica set and thus the pods. `kubectl expose` creates
 the service that provides accesses to the replica set and create an IP
-address, a node port or load Balancer and a DNS entry.
+address, a node port or load balancer and a DNS entry.
 
 This excerpt from `kubernetes-deploy.sh` shows how the
 tools are used to deploy and run the catalog microservice:
@@ -220,21 +218,21 @@ kubectl expose deployment/catalog --type="LoadBalancer" --port 80
 
 ## Alternative Recipes: Netflix, Consul, Cloud Foundry
 
-Besides Kubernetes, there are several other solutions for synchronous microservices:
+In addition to Kubernetes, there are several other solutions for synchronous microservices:
 
 * *Cloud Foundry* also uses Docker like Kubernetes. However, 
   Cloud Foundry is a PaaS (Platform as a Service). It provides
-  a complete platform for application. That's why it is not
-  necessary to create Docker container. It's enough to just 
+  a complete platform for the application. That's why it is not
+  necessary to create Docker containers. It is sufficient to just
   provide a Java application.
   - Cloud Foundry also implements *service discovery* with DNS.
   - The platform implements *load balancing* at the network level.
-  - For *routing* of requests from external systems it is enough
+  - For *routing* of requests from external systems it is sufficient
     to use the DNS name of the microservice.
   - Much like Kubernetes Cloud Foundry does not really  support *resilience*.
 
     The
-    [Cloud Foundry Demo](https://github.com/ewolff/microservice-cloudfoundry)
+    [Cloud Foundry demo](https://github.com/ewolff/microservice-cloudfoundry)
     implements an example that is basically identical  with the
     Kubernetes example. There is a detailed
     [guide](https://github.com/ewolff/microservice-cloudfoundry/blob/master/HOW-TO-RUN.md)
@@ -243,7 +241,7 @@ Besides Kubernetes, there are several other solutions for synchronous microservi
 * *Consul* is actually a service discovery technology.
   However, it can be combined with some other technologies
   to provide a complete solution for microservices.
-  - Consul also offers one a DNS interface for *service discovery*.
+  - Consul also offers a DNS interface for *service discovery*.
     It also has a separate interface for 
     service discovery that can be used to add and read the information.
   - For *routing* Consul itself offers no solution. But
@@ -253,15 +251,14 @@ Besides Kubernetes, there are several other solutions for synchronous microservi
     to receive HTTP requests from the outside and send them to the microservices.
     The web server reads the configuration file provided by Consul Template.
     It does not need to implement any interface to Consul.
-  - *Load balancing* can be implemented just like routing with a web server  and
-    Consul Template. An alternative is a
-    Java library like
+  - *Load balancing* can be implemented just like routing with a web server and
+    Consul Template. An alternative is a Java library like
     [Ribbon](https://github.com/Netflix/ribbon/wiki). It implements load
     balancing in the calling microservice.
   - *Resilience* needs to be implemented with an additional library.
 
     The
-    [Consul Example](https://github.com/ewolff/microservice-consul/)
+    [Consul example](https://github.com/ewolff/microservice-consul/)
     uses Spring Cloud to register the microservices
     and the Ribbon library for load balancing. Hystrix provides resilience.
     Apache httpd implements routing and Consul Template
@@ -271,46 +268,45 @@ Besides Kubernetes, there are several other solutions for synchronous microservi
     Docker containers  in Consul. Together with access to
     Consul  via DNS, Consul can be just as transparently used 
     as Kubernetes or Cloud Foundry. The
-    [Consul DNS Example](https://github.com/ewolff/microservice-consul-dns/)
+    [Consul DNS example](https://github.com/ewolff/microservice-consul-dns/)
     implements this approach.
 
 * The *Netflix Stack* provides a complete solution for synchronous
-  Microservices
+  Microservices:
   - Eureka implements *service discovery*. It has a
-    REST interface and the Eureka Java client library also implements
+    REST interface, and the Eureka Java client library also implements
     a cache on the client.
   - Ribbon is the *load balancer* of the Netflix stack. This is
     a Java library that selects one of the service instances
     registered at Eureka.
   - Zuul is a proxy for *routing* written in Java.
     Zuul can be supplemented with custom filters, which can be written in Java
-    or Groovy. So Zuul can
-    be extended very flexibly.
+    or Groovy. Therefore, Zuul can be extended very flexibly.
 - For *resilience* the Netflix stack uses Hystrix.
 
     The [Netflix example](https://github.com/ewolff/microservice)
-    uses Spring Cloud to integrate the Netflix stack into the Java
+    uses Spring Cloud to integrate the Netflix stack into Java
     applications. The microservices system implements the same
     scenario as the other examples for synchronous microservices.
 
 The Kubernetes and Cloud Foundry examples have no code
-dependencies. Such a solution can be implemented with Consul, too.
-That way the microservice systems can easily use other technologies
-than Java. That supports technology freedom, a major benefit of
+dependencies. Such a solution can also be implemented with Consul.
+In this way, the microservice systems can easily use other technologies
+than Java. This supports technology freedom, a major benefit of
 microservices.
 
 ## Conclusion
 
 Kubernetes offers a very powerful solution for synchronous
-microservices that also covers also the operations of
+microservices that also covers the operations of
 microservices. PaaS like Cloud Foundry provide a higher level of
-abstraction, so the user does not have to deal with Docker. But both
-Kubernetes and Cloud Foundry force user to run a different runtime
+abstraction, thus the user does not have to deal with Docker. But both,
+Kubernetes and Cloud Foundry, force users to run a different runtime
 environment. It is not possible to stick to bare metal or virtual
-systems instead Kubernetes or a PaaS like Cloud Foundry must be used.
-This is not the case with Consul and Netflix: both systems can be used
-with Docker containers as well as virtual machines or physical
-servers. Of those two, Consul offers a lot more features
+systems, instead Kubernetes or a PaaS like Cloud Foundry must be used.
+This is not the case with Consul and Netflix: Both systems can be used
+with Docker containers as well as with virtual machines or physical
+servers. Of those two, Consul offers a lot more features.
 
 ## Experiments
 
@@ -322,5 +318,5 @@ servers. Of those two, Consul offers a lot more features
    * `kubectl scale` changes the number of pods in a replica set.
    `kubectl scale -h` shows the options of the command.
    For example, scale the replica set `catalog`.
-   * `kubectl get deployments` shows how many pods are in running in each
+   * `kubectl get deployments` shows how many pods are running in each
      deployment.
