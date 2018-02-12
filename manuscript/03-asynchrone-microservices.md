@@ -216,7 +216,7 @@ need an additional server. It is not that easy to send a message to a
 single recipient, because the protocol does not have a direct support
 for this.
 
-## experiments
+## Experiments
 
 * Start the Kafka example. See
   <https://github.com/ewolff/microservice-kafka/blob/master/HOW-TO-RUN.md>.

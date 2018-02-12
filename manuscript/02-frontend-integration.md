@@ -238,7 +238,7 @@ additional infrastructure of a cache can be saved. Finally, a
 client-side integration can load optional content, such as the
 overview of the postbox.
 
-## Wxperiments
+## Experiments
 
 * Start the ESI example. Please refer to
 <https://github.com/ewolff/SCS-ESI/blob/master/HOW-TO-RUN.md>.
