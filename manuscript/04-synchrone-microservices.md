@@ -263,7 +263,7 @@ In addition to Kubernetes, there are several other solutions for synchronous mic
     and the Ribbon library for load balancing. Hystrix provides resilience.
     Apache httpd implements routing and Consul Template
     configures Apache httpd. An alternative would be
-    [Registrar](https://github.com/gliderlabs/registrator). It
+    [Registrator](https://github.com/gliderlabs/registrator). It
     automatically registers 
     Docker containers  in Consul. Together with access to
     Consul  via DNS, Consul can be just as transparently used 
