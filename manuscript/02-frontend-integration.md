@@ -64,7 +64,9 @@ example contains only one implemented microservice, the order
 microservice. The order microservice is a Spring Boot application and
 written in Java while the common microservice is written in Go. It
 shows that even very different technologies can be integrated in the
-frontend.
+frontend. The Varnish cache routes requests to the correct
+microservice. That way it implements the functionality of a reverse
+proxy.
 
 {title = "Listing 1: HTML output by the Order Microservice", id = "listing-01"}
 ~~~~~~~~
