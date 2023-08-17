@@ -130,7 +130,7 @@ most important characteristics:
 
 - An SCS can have an *optional API*. But the API is not strictly
   necessary, since the SCS already has a web interface for the
-  user. For mobile clients or other SCSs, access via an API maybe
+  user. For mobile clients or other SCSs, access via an API might be
   useful.
 
 - The SCS contains *data and logic*. A new feature typically requires
